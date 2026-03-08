@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Women's Day</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:Arial;
+background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+overflow:hidden;
+}
+
+.card{
+background:white;
+padding:40px;
+border-radius:20px;
+text-align:center;
+width:380px;
+box-shadow:0 15px 30px rgba(0,0,0,0.2);
+}
+
+h1{
+color:#e91e63;
+}
+
+button{
+margin-top:20px;
+padding:12px 24px;
+border:none;
+background:#e91e63;
+color:white;
+font-size:16px;
+border-radius:10px;
+cursor:pointer;
+}
+
+#message{
+margin-top:20px;
+font-size:20px;
+color:#e91e63;
+font-weight:bold;
+min-height:60px;
+}
+
+/* flowers */
+
+.flower{
+position:absolute;
+top:-20px;
+font-size:22px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(0);}
+100%{transform:translateY(100vh);}
+}
+
+/* hearts */
+
+.heart{
+position:absolute;
+font-size:22px;
+animation:explode 1s forwards;
+}
+
+@keyframes explode{
+0%{transform:scale(1);opacity:1;}
+100%{transform:translateY(-120px) scale(1.8);opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1 id="title"></h1>
+
+<p>Click the button for a surprise 💌</p>
+
+<button onclick="startSurprise()">Open Surprise</button>
+
+<div id="message"></div>
+
+</div>
+
+<!-- romantic instrumental music -->
+<audio id="music" preload="auto">
+<source src="romantic.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* CHANGE HER NAME */
+
+let name = "Suhani";
+
+document.getElementById("title").innerHTML =
+"🌸 Happy Women's Day, " + name + " 🌸";
+
+/* message */
+
+let text =
+name + ", you are strong, inspiring and truly special. May your life always be filled with happiness and love. Happy Women's Day! 💖";
+
+let i = 0;
+
+function typeWriter(){
+
+if(i < text.length){
+
+document.getElementById("message").innerHTML += text.charAt(i);
+
+i++;
+
+setTimeout(typeWriter,50);
+
+}
+
+}
+
+/* start surprise */
+
+function startSurprise(){
+
+let music = document.getElementById("music");
+
+music.volume = 0.6;
+
+music.play().catch(()=>{});
+
+typeWriter();
+
+heartExplosion();
+
+}
+
+/* hearts */
+
+function heartExplosion(){
+
+for(let i=0;i<20;i++){
+
+let heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerHTML="💖";
+
+heart.style.left=(window.innerWidth/2 + Math.random()*200 -100)+"px";
+
+heart.style.top=(window.innerHeight/2)+"px";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+
+heart.remove();
+
+},1000);
+
+}
+
+}
+
+/* flowers */
+
+function createFlower(){
+
+let flower=document.createElement("div");
+
+flower.className="flower";
+
+flower.innerHTML="🌸";
+
+flower.style.left=Math.random()*100+"vw";
+
+flower.style.animationDuration=(5+Math.random()*5)+"s";
+
+document.body.appendChild(flower);
+
+setTimeout(()=>{
+
+flower.remove();
+
+},10000);
+
+}
+
+setInterval(createFlower,500);
+
+</script>
+
+</body>
+</html>
